@@ -1,14 +1,24 @@
+import InputField from "./InputField.jsx";
 import { useState } from "react";
 
 export default function CrudForm() {
-  
+  const [errors, setErrors] = useState({
+    nameError: false,
+    usernameError: false,
+    emailError: false,
+    cityError: false,
+    zipcodeError: false,
+    phoneError: false,
+    isValid: true,
+  });
+
   const initialUserData = {
     name: "",
     username: "",
     email: "",
     city: "",
     zipcode: "",
-    phone:"",
+    phone: "",
   };
   const [userData, setUserdata] = useState(initialUserData);
   
@@ -16,50 +26,66 @@ export default function CrudForm() {
     setUserdata({ ...userData, [e.target.name]: e.target.value });
   }
 
+  function submitForm(e) {
+    e.preventDefault();
+    validateForm(userData);
+  }
+
+  function validateForm(userData) {
+
+    //new errors obj(can mutate it) to use it on setErrors
+    let newErrors = { nameError: false, usernameError: false, emailError: false, cityError: false, zipcodeError: false, phoneError: false, isValid: true, };
+    
+    // asume the correct phone number has exact 10digits
+    const regXphone = /^\d{10}$/;
+    if (!regXphone.test(userData.phone)) {
+      newErrors.phoneError = true;
+      newErrors.isValid = false;
+    }
+
+    //zipcode input should contain only digits or a hyphen
+    //(actually star-end with digit and includes digits with 0|1 hyphen)
+    const regXzipcode = /^\d+[-]?\d+$/;
+    if (!regXzipcode.test(userData.zipcode)) {
+      newErrors.zipcodeError = true;
+      newErrors.isValid = false;
+    }
+
+    //city input should contains only letters
+    const regXcity = /^[A-z]+$/;
+    if (!regXcity.test(userData.city)) {
+      newErrors.cityError = true;
+      newErrors.isValid = false;
+    }
+
+    if (!userData.email.includes("@")) {
+      newErrors.emailError = true;
+      newErrors.isValid = false;
+    }
+
+    if (userData.username.length < 5) {
+      newErrors.usernameError = true;
+      newErrors.isValid = false;
+    }
+
+    if (userData.name.length < 5) {
+      newErrors.nameError = true;
+      newErrors.isValid = false;
+    }
+    //set up errors of validation
+    setErrors({...newErrors})
+  }
+
+
+
   return (
-    <form className="crud-form" name="crudForm" action="" method="" noValidate>
-      <div className="form-row">
-        <label htmlFor="name" className="form-control__item">Name:</label>
-        <input id="name" name="name" type="text" onChange={hadleOnChange} value={userData.name}/>
-      </div>
-      <div className="error-message">
-        <p id="nameError"></p>
-      </div>
-      <div className="form-row">
-        <label htmlFor="username" className="form-control__item">Username:</label>
-        <input id="username" name="username" type="text" onChange={hadleOnChange} value={userData.username}/>
-      </div>
-      <div className="error-message">
-        <p id="usernameError"></p>
-      </div>
-      <div className="form-row">
-        <label htmlFor="email">Email:</label>
-        <input id="email" name="email" type="email" onChange={hadleOnChange} value={userData.email}/>
-      </div>
-      <div className="error-message">
-        <p id="emailError"></p>
-      </div>
-      <div className="form-row">
-        <label htmlFor="city">City:</label>
-        <input id="city" name="city" type="text" onChange={hadleOnChange} value={userData.city}/>
-      </div>
-      <div>
-        <p className="error-message" id="cityError"></p>
-      </div>
-      <div className="form-row">
-        <label htmlFor="zipcode">Zipcode:</label>
-        <input id="zipcode" name="zipcode" type="text" onChange={hadleOnChange} value={userData.zipcode}/>
-      </div>
-      <div>
-        <p className="error-message" id="zipcodeError"></p>
-      </div>
-      <div className="form-row">
-        <label htmlFor="phone">Phone:</label>
-        <input id="phone" name="phone" type="tel" onChange={hadleOnChange} value={userData.phone}/>
-      </div>
-      <div>
-        <p className="error-message" id="phoneError"></p>
-      </div>
+    <form className="crud-form" name="crudForm" onSubmit={submitForm} action="" method="" noValidate>
+      <InputField name="name" type="text" error={errors.nameError} onChange={hadleOnChange} value={userData.name} />
+      <InputField name="username" type="text" error={errors.usernameError} onChange={hadleOnChange} value={userData.username} />
+      <InputField name="email" type="email" error={errors.emailError} onChange={hadleOnChange} value={userData.email} />
+      <InputField name="city" type="text" error={errors.cityError} onChange={hadleOnChange} value={userData.city} />
+      <InputField name="zipcode" type="text" error={errors.zipcodeError} onChange={hadleOnChange} value={userData.zipcode} />
+      <InputField name="phone" type="text" error={errors.phoneError} onChange={hadleOnChange} value={userData.phone} />
       <div className="form-row">
         <button name="submitButton">Save</button>
       </div>
