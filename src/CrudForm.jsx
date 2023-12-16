@@ -31,7 +31,7 @@ export default function CrudForm(props) {
   const zipcodeRef = useRef(null);
   const phoneRef = useRef(null);
   
-  function hadleOnChange(e) {
+  function handleOnChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   }
 
@@ -140,12 +140,12 @@ export default function CrudForm(props) {
 
   return (
     <form className="crud-form" name="crudForm" onSubmit={submitForm} action="" method="" noValidate>
-      <InputField name="name" type="text" error={errors.nameError} onChange={hadleOnChange} value={userData.name} ref={nameRef}/>
-      <InputField name="username" type="text" error={errors.usernameError} onChange={hadleOnChange} value={userData.username} ref={usernameRef}/>
-      <InputField name="email" type="email" error={errors.emailError} onChange={hadleOnChange} value={userData.email} ref={emailRef}/>
-      <InputField name="city" type="text" error={errors.cityError} onChange={hadleOnChange} value={userData.city} ref={cityRef}/>
-      <InputField name="zipcode" type="text" error={errors.zipcodeError} onChange={hadleOnChange} value={userData.zipcode} ref={zipcodeRef}/>
-      <InputField name="phone" type="text" error={errors.phoneError} onChange={hadleOnChange} value={userData.phone} ref={phoneRef}/>
+      <InputField name="name" type="text" error={errors.nameError} onChange={handleOnChange} value={userData.name} ref={nameRef}/>
+      <InputField name="username" type="text" error={errors.usernameError} onChange={handleOnChange} value={userData.username} ref={usernameRef}/>
+      <InputField name="email" type="email" error={errors.emailError} onChange={handleOnChange} value={userData.email} ref={emailRef}/>
+      <InputField name="city" type="text" error={errors.cityError} onChange={handleOnChange} value={userData.city} ref={cityRef}/>
+      <InputField name="zipcode" type="text" error={errors.zipcodeError} onChange={handleOnChange} value={userData.zipcode} ref={zipcodeRef}/>
+      <InputField name="phone" type="text" error={errors.phoneError} onChange={handleOnChange} value={userData.phone} ref={phoneRef}/>
       <div className="form-row">
         <button name="submitButton">Save</button>
       </div>

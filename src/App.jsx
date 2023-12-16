@@ -2,28 +2,20 @@ import CrudForm from "./CrudForm.jsx";
 import FilterForm from "./FilterForm.jsx";
 import UsersDisplay from "./UsersDiplay.jsx";
 import { useState, useEffect } from "react";
+import { fetchData } from "./Utilities.jsx";
 import './App.css'
 
 export default function App() {
   const [users, setUsers] = useState([]);
-  async function fetchData() {
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
-        if (!response.ok) {
-            throw new Error("Sorry something went wrong");
-        }
-        // read response body as json
-        const data = await response.json();
-        setUsers(data);
-    }
-    catch (error) {
-        alert(error.message);
-    }
+  
+  async function fetchUsers(){
+    let data = await fetchData();
+    setUsers(data);
   }
 
   useEffect(() => {
-    fetchData()
+    fetchUsers();
   }, []);
   
   return (
