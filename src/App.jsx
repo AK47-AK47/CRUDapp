@@ -36,7 +36,7 @@ export default function App() {
           <CrudForm setUsers={setUsers} users={users}/>
         </aside>
         <div className="main-container">
-          <FilterForm />
+          <FilterForm setUsers={setUsers} users={users}/>
           <UsersDisplay users={users}/>
         </div>
       </main>
