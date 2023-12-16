@@ -1,15 +1,15 @@
 import {InputField} from "./InputField.jsx";
 import { useState, useRef } from "react";
 
-export default function CrudForm() {
+export default function CrudForm(props) {
   const [errors, setErrors] = useState({
-    nameError: false,
-    usernameError: false,
-    emailError: false,
-    cityError: false,
-    zipcodeError: false,
-    phoneError: false,
-    isValid: true,
+    nameError: null,
+    usernameError: null,
+    emailError: null,
+    cityError: null,
+    zipcodeError: null,
+    phoneError: null,
+    isValid: null,
   });
 
   const initialUserData = {
@@ -37,8 +37,21 @@ export default function CrudForm() {
 
   function submitForm(e) {
     e.preventDefault();
-    validateForm(userData);
+    let newErrorsObj = validateForm(userData);
+    setErrors({ ...newErrorsObj })
     
+    if (newErrorsObj.isValid) {
+      console.log("all good valid");
+      //proceed with submission
+      submitFormData(userData);
+      //empty form fields
+      setUserData(initialUserData);
+      //focus on first input field
+      nameRef.current.focus();
+    }
+    else {
+      console.log("error valid");
+    }
   }
 
   function validateForm(userData) {
@@ -48,7 +61,7 @@ export default function CrudForm() {
     
     // asume the correct phone number has exact 10digits
     const regXphone = /^\d{10}$/;
-    if (!regXphone.test(userData.phone)) {
+    if(!regXphone.test(userData.phone)) {
       newErrors.phoneError = true;
       newErrors.isValid = false;
       phoneRef.current.focus();
@@ -88,12 +101,42 @@ export default function CrudForm() {
       newErrors.isValid = false;
       nameRef.current.focus();
     }
-    //set up errors of validation
-    setErrors({ ...newErrors })
-    //on submit without errors focus on first inut field
+    
+    return newErrors;
+    
   }
+  
+  async function submitFormData(data) {
+    console.log("on submitFormData()");
+    let sendingData = {
+      name: data.name,
+      username: data.username,
+      email: data.email,
+      address: { city: data.city, zipcode: data.zipcode },
+      phone: data.phone
+    };
 
+    try {
+      let response = await fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        body: JSON.stringify(sendingData),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      });
 
+      if (!response.ok) {
+        throw new Error("Sorry something went wrong");
+      }
+      // read response body as json
+      let newUser = await response.json();
+      
+      //add new user(json format) to DOM
+      props.setUsers([...props.users, newUser]);
+    }
+    catch (error) {
+      alert(error.message);
+    } 
+    console.log("create new User with out errors");
+  }
 
   return (
     <form className="crud-form" name="crudForm" onSubmit={submitForm} action="" method="" noValidate>
