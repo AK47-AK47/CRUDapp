@@ -1,11 +1,22 @@
 import { useState } from "react";
 import "./FilterForm.css";
 
-export default function FilterForm() {
+export default function FilterForm(props) {
     const [filterValue, setFilterValue] = useState("");
 
     function hadleOnChange(e) {
+
+        let filteredUsers = props.users.filter(user => {
+            //make filtering case insensitive
+            let userNameLowerCase = user.name.toLowerCase();
+            let filterStringLowerCase = e.target.value.toLowerCase();
+        
+            return userNameLowerCase.includes(filterStringLowerCase);
+        });
+        
         setFilterValue(e.target.value);
+        props.setUsers(filteredUsers);
+
     }
     
     return (
