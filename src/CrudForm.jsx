@@ -21,7 +21,7 @@ export default function CrudForm() {
     phone: "",
   };
 
-  const [userData, setUserdata] = useState(initialUserData);
+  const [userData, setUserData] = useState(initialUserData);
 
   //refs used for focus after submit (with or with out errors)
   const nameRef = useRef(null);
@@ -32,12 +32,13 @@ export default function CrudForm() {
   const phoneRef = useRef(null);
   
   function hadleOnChange(e) {
-    setUserdata({ ...userData, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   }
 
   function submitForm(e) {
     e.preventDefault();
     validateForm(userData);
+    
   }
 
   function validateForm(userData) {
