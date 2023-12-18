@@ -1,29 +1,22 @@
 /* General layoyt styles */
 #root{
-  width:100%;
-}
-
-
-
-main {
-  display: flex;
-  flex-direction: row;
-}
-
-aside {
-  flex-basis: min-content; /*should fix the basis = width*/
-  background-color: white;
-  margin-right: 10px;
+    width:100%;
 }
 
 main {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: column;
 }
 
 aside {
-  flex-basis: min-content; /*should fix the basis = width*/
-  margin-right: 10px;
+    background-color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    /*gap: 1rem;
+    margin: 0 0 20px 10px; /*upside rightSide dowwside leftSide*/
 }
 
 .box {
@@ -31,8 +24,22 @@ aside {
   margin-bottom: 20px;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+/* tablets and desktop layout*/
+@media (min-width: 641px) {
+    main {
+      display: flex;
+      flex-direction: row;
+    }
+
+    aside {
+        flex-basis: min-content; /*should fix the basis = width*/
+        margin-right: 10px;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }

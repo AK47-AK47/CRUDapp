@@ -2,15 +2,14 @@
     margin: 10px;
     display: flex;
 }
-
+  
 .form-row > label {
-    padding-right: 10px;
     flex-grow: 1;
     flex-basis: 0;
 }
-
+  
 .form-row > input {
-    flex-grow: 2;
+    flex-grow: 1;
     flex-basis: 0;
 }
 
@@ -25,4 +24,19 @@
 
 .error-input {
     border: 2px solid red;
+}
+
+
+/* tablets and desktop layout*/
+@media (min-width: 641px) {
+    .form-row > label {
+        padding-right: 10px;
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    .form-row > input {
+        flex-grow: 2;
+        flex-basis: 0;
+    }
 }

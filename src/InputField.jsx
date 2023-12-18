@@ -12,7 +12,7 @@ export const InputField = forwardRef((props, ref) => {
         phone: "You must add a phone number",
     };
 
-    //upper case the first letter to the string on label
+    //upper case the first letter to the string used on label
     function toUpperCaseFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -24,7 +24,7 @@ export const InputField = forwardRef((props, ref) => {
                 <input name={props.name} className={props.error ? "error-input" : ""} type={props.type} onChange={props.onChange} value={props.value} ref={ref} />
             </div>
             <div className="error-message">
-                <p id={props.name + "Error"}>{props.error ? errorMessages[props.name] : ""}</p>
+                <p>{props.error ? errorMessages[props.name] : ""}</p>
             </div>
         </>
     );

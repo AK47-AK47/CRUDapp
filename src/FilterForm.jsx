@@ -40,7 +40,7 @@ export default function FilterForm(props) {
         <form className="filter-form" name="filterForm" action="" method="">
             <div className="filter-form-row">
                 <label htmlFor="filter">Filter By Name:</label>
-                <input id="filter" name="filterInput" type="text" onChange={handleOnChange} value={filterValue}/>
+                <input name="filterInput" type="text" onChange={handleOnChange} value={filterValue}/>
                 <button name="sortButton" type="button" onClick={handleOnClick}>{buttonText}</button>
             </div>
         </form>

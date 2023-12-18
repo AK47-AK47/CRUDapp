@@ -1,8 +1,21 @@
+
 .main-container__card {
     border: 2px solid #2c88eb;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 20px;
     background-color: white;
-    flex-basis: 17%;
-    flex-grow: 0;
+    overflow-wrap: break-word;
+    flex-grow: 1;
+}
+
+/* tablets and desktop layout*/
+@media (min-width: 641px) {
+    .main-container__card {
+        border: 2px solid #2c88eb;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: white;
+        flex-basis: 17%;
+        flex-grow: 0;
+    }
 }
