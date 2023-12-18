@@ -8,7 +8,6 @@ import './App.css'
 export default function App() {
   const [users, setUsers] = useState([]);
 
-  
   async function fetchUsers(){
     let data = await fetchData();
     setUsers(data);

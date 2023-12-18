@@ -1,7 +1,6 @@
 import "./UserCard.css";
 
 export default function UserCard(props) {
-    
     return (
         <article className="main-container__card">
             <p>Name: {props.user.name}</p>

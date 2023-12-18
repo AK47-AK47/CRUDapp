@@ -16,21 +16,23 @@ export default function FilterForm(props) {
         props.setUsers(filteredUsers);
     }
 
+    //on click button > sort users
     async function handleOnClick() {
-        console.log("filterValue",filterValue);
+
+        //get filtered users based on filter input (filterValue)
         let filteredUsers = await filterUsers(filterValue);
-        if(sortAscending){
-            //document.forms.filterForm.sortButton.innerHTML = "Sort By Name &#9650";//triangle up character ▲ HTML code
+        //sort asc
+        if (sortAscending) {
             filteredUsers.sort((a, b) => a.name.localeCompare(b.name));
             setSortAscending(false);
             setButtontext("Sort By Name ▲");
           }
           else{//sort desc
-            //document.forms.filterForm.sortButton.innerHTML = "Sort By Name &#9660";//triangle down character ▼ unicode
             filteredUsers.sort((a, b) => b.name.localeCompare(a.name));
             setSortAscending(true);
             setButtontext("Sort By Name ▼");
         }
+        //set filtered users
         props.setUsers(filteredUsers);
     }
     

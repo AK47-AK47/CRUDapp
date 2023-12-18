@@ -1,3 +1,4 @@
+//fetch users from server
 export async function fetchData() {
     try{
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -14,6 +15,7 @@ export async function fetchData() {
     }
 }
 
+//filter users based on name (filterString)
 export async function filterUsers(filterString) {
     //for filtering always fetch users from server
     let allUsers = await fetchData();

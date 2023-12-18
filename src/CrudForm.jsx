@@ -41,16 +41,12 @@ export default function CrudForm(props) {
     setErrors({ ...newErrorsObj })
     
     if (newErrorsObj.isValid) {
-      console.log("all good valid");
       //proceed with submission
       submitFormData(userData);
       //empty form fields
       setUserData(initialUserData);
       //focus on first input field
       nameRef.current.focus();
-    }
-    else {
-      console.log("error valid");
     }
   }
 
@@ -103,11 +99,10 @@ export default function CrudForm(props) {
     }
     
     return newErrors;
-    
   }
   
   async function submitFormData(data) {
-    console.log("on submitFormData()");
+    
     let sendingData = {
       name: data.name,
       username: data.username,
@@ -134,8 +129,7 @@ export default function CrudForm(props) {
     }
     catch (error) {
       alert(error.message);
-    } 
-    console.log("create new User with out errors");
+    }
   }
 
   return (

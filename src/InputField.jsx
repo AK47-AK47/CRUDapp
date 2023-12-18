@@ -12,6 +12,7 @@ export const InputField = forwardRef((props, ref) => {
         phone: "You must add a phone number",
     };
 
+    //upper case the first letter to the string on label
     function toUpperCaseFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
